@@ -21,8 +21,7 @@ let MessageController = class MessageController {
         this.messageService = messageService;
     }
     async findAll(pagination) {
-        const { limit = 10, offset = 0 } = pagination;
-        return await this.messageService.findAll();
+        return await this.messageService.findAll(pagination);
     }
     async findOne(id) {
         return await this.messageService.findOne(id);
@@ -55,7 +54,7 @@ __decorate([
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [MessageRequest_1.MessageRequest.Pagination]),
     __metadata("design:returntype", Promise)
 ], MessageController.prototype, "findAll", null);
 __decorate([

@@ -14,6 +14,8 @@ import {
 import { MessageService } from '../../application/services/message.service';
 import { MessageRequest } from '../requests/MessageRequest';
 import { MessageEntity } from '../../domain/entities/MessageEntity';
+import { MessageResponse } from '../../application/response/MessageResponse';
+import { PaginationResponse } from 'src/shared/application/response/PagnationResponse';
 
 @Controller('messages')
 export class MessageController {
@@ -21,14 +23,13 @@ export class MessageController {
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  async findAll(@Query() pagination: any) {
-    const { limit = 10, offset = 0 } = pagination;
-    return await this.messageService.findAll();
+  async findAll(@Query() pagination: MessageRequest.Pagination) {
+    return await this.messageService.findAll(pagination);
   }
 
   @HttpCode(HttpStatus.OK)
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string): Promise<MessageResponse.Message> {
     return await this.messageService.findOne(id);
   }
 

@@ -117,7 +117,7 @@ exports.UserModule = UserModule = __decorate([
                 inject: ['UserRepository', 'HashProvider'],
             },
         ],
-        exports: [],
+        exports: [UserShowService_1.UserShowService],
     })
 ], UserModule);
 //# sourceMappingURL=user.module.js.map

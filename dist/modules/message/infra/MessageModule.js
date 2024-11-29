@@ -12,12 +12,13 @@ const MessageController_1 = require("./controllers/MessageController");
 const message_service_1 = require("../application/services/message.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const MessageEntity_1 = require("../domain/entities/MessageEntity");
+const user_module_1 = require("../../user/infra/user.module");
 let MessageModule = class MessageModule {
 };
 exports.MessageModule = MessageModule;
 exports.MessageModule = MessageModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([MessageEntity_1.MessageEntity])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([MessageEntity_1.MessageEntity]), user_module_1.UserModule],
         controllers: [MessageController_1.MessageController],
         providers: [message_service_1.MessageService],
     })

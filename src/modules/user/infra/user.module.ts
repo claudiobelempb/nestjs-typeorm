@@ -114,6 +114,6 @@ import { UserUpdatePasswordController } from './controllers/UserUpdatePasswordCo
       inject: ['UserRepository', 'HashProvider'],
     },
   ],
-  exports: [],
+  exports: [UserShowService],
 })
 export class UserModule {}

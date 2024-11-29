@@ -1,11 +1,27 @@
 import { IsBoolean, IsDate, IsEmail, IsString } from 'class-validator';
+import { MessageEntity } from 'src/modules/message/domain/entities/MessageEntity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+export interface UserEntityProps {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password?: string;
+  send?: MessageEntity[];
+  received?: MessageEntity[];
+  isActive?: boolean;
+  isAmbassador?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 @Entity('user')
 export class UserEntity {
@@ -29,6 +45,12 @@ export class UserEntity {
   @Column()
   @IsString()
   password?: string;
+
+  @OneToMany(() => MessageEntity, (message) => message.from)
+  send?: MessageEntity[];
+
+  @OneToMany(() => MessageEntity, (message) => message.to)
+  received?: MessageEntity[];
 
   @Column({ default: true })
   @IsBoolean()

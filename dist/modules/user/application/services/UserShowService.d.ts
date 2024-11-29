@@ -1,7 +1,7 @@
 import { UserRepository } from '../../domain/repositories/UserRepository';
-import { UserEntity } from '../../domain/entities/use.entity';
+import { UserResponse } from '../response/user.response';
 export declare class UserShowService {
     private readonly userRepository;
     constructor(userRepository: UserRepository);
-    execute(id: string): Promise<UserEntity>;
+    execute(id: string): Promise<UserResponse.User>;
 }

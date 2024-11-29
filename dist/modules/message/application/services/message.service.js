@@ -15,31 +15,79 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MessageService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const UserShowService_1 = require("../../../user/application/services/UserShowService");
 const ConstantException_1 = require("../../../../shared/utils/constants/ConstantException");
 const typeorm_2 = require("typeorm");
 const MessageEntity_1 = require("../../domain/entities/MessageEntity");
+const MessageMapper_1 = require("../mapper/MessageMapper");
 let MessageService = class MessageService {
-    constructor(messageRepositoy) {
+    constructor(messageRepositoy, userShowService) {
         this.messageRepositoy = messageRepositoy;
+        this.userShowService = userShowService;
     }
-    async findAll() {
-        return await this.messageRepositoy.find();
+    async findAll(pagination) {
+        const { limit = 10, offset = 0 } = pagination;
+        return await this.messageRepositoy.find({
+            take: limit,
+            skip: offset,
+            relations: ['from', 'to'],
+            order: {
+                id: 'desc',
+            },
+            select: {
+                from: {
+                    id: true,
+                    firstName: true,
+                    lastName: true,
+                    email: true,
+                },
+                to: {
+                    id: true,
+                    firstName: true,
+                    lastName: true,
+                    email: true,
+                },
+            },
+        });
     }
     async findOne(id) {
         try {
-            const entity = await this.messageRepositoy.findOne({ where: { id } });
-            return entity;
+            const entity = await this.messageRepositoy.findOne({
+                where: { id },
+                relations: ['from', 'to'],
+                select: {
+                    from: {
+                        id: true,
+                        firstName: true,
+                        lastName: true,
+                        email: true,
+                    },
+                    to: {
+                        id: true,
+                        firstName: true,
+                        lastName: true,
+                        email: true,
+                    },
+                },
+            });
+            return MessageMapper_1.MessageMapper.toResponse(entity);
         }
         catch (error) {
             throw new common_1.NotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
         }
     }
     async create(request) {
-        const newMessage = {
-            ...request,
-        };
+        const { text, fromId, toId } = request;
+        const from = await this.userShowService.execute(fromId);
+        const to = await this.userShowService.execute(toId);
+        const newMessage = new MessageEntity_1.MessageEntity();
+        newMessage.text = text;
+        newMessage.from = from;
+        newMessage.to = to;
         const entity = this.messageRepositoy.create(newMessage);
-        return await this.messageRepositoy.save(entity);
+        const response = await this.messageRepositoy.save(entity);
+        console.log(MessageMapper_1.MessageMapper.toResponse(response));
+        return MessageMapper_1.MessageMapper.toResponse(response);
     }
     async update(id, request) {
         try {
@@ -112,6 +160,7 @@ exports.MessageService = MessageService;
 exports.MessageService = MessageService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(MessageEntity_1.MessageEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        UserShowService_1.UserShowService])
 ], MessageService);
 //# sourceMappingURL=message.service.js.map

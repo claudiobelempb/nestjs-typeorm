@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserEntity = void 0;
 const class_validator_1 = require("class-validator");
+const MessageEntity_1 = require("../../../message/domain/entities/MessageEntity");
 const typeorm_1 = require("typeorm");
 let UserEntity = class UserEntity {
 };
@@ -41,6 +42,14 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UserEntity.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => MessageEntity_1.MessageEntity, (message) => message.from),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "send", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => MessageEntity_1.MessageEntity, (message) => message.to),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "received", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: true }),
     (0, class_validator_1.IsBoolean)(),

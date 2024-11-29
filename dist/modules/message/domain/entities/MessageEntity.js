@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MessageEntity = void 0;
 const class_validator_1 = require("class-validator");
+const use_entity_1 = require("../../../user/domain/entities/use.entity");
 const typeorm_1 = require("typeorm");
 let MessageEntity = class MessageEntity {
 };
@@ -26,14 +27,14 @@ __decorate([
     __metadata("design:type", String)
 ], MessageEntity.prototype, "text", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 64 }),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, typeorm_1.ManyToOne)(() => use_entity_1.UserEntity, { onDelete: 'CASCADE', onUpdate: 'CASCADE' }),
+    (0, typeorm_1.JoinColumn)({ name: 'from' }),
+    __metadata("design:type", use_entity_1.UserEntity)
 ], MessageEntity.prototype, "from", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 64 }),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, typeorm_1.ManyToOne)(() => use_entity_1.UserEntity, { onDelete: 'CASCADE', onUpdate: 'CASCADE' }),
+    (0, typeorm_1.JoinColumn)({ name: 'to' }),
+    __metadata("design:type", use_entity_1.UserEntity)
 ], MessageEntity.prototype, "to", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: false }),

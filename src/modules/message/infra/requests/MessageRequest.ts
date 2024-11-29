@@ -1,16 +1,24 @@
 import { OmitType, PartialType } from '@nestjs/mapped-types';
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 import { ConstantValidator } from 'src/shared/utils/constants/ConstantValidator';
 import { MessageEntity } from '../../domain/entities/MessageEntity';
+import { Type } from 'class-transformer';
 
+export interface MessageRequestProps {
+  readonly text: string;
+  readonly fromId: string;
+  readonly toId: string;
+}
 export namespace MessageRequest {
-  export class Create extends OmitType(MessageEntity, [
-    'id',
-    'isRead',
-    'isActive',
-    'createdAt',
-    'updatedAt',
-  ] as const) {
+  export class Create implements MessageRequestProps {
     @IsString({ message: ConstantValidator.INVALID })
     @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
     // @MinLength(5, { message: `${ConstantValidator.MIN_LENGTH} 5` })
@@ -18,14 +26,27 @@ export namespace MessageRequest {
 
     @IsString({ message: ConstantValidator.INVALID })
     @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
-    readonly from: string;
+    readonly fromId: string;
 
     @IsString({ message: ConstantValidator.INVALID })
     @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
-    readonly to: string;
+    readonly toId: string;
   }
 
-  export class Update extends PartialType(Create) {}
+  export class Update implements Omit<MessageRequestProps, 'fromId' | 'toId'> {
+    @IsString({ message: ConstantValidator.INVALID })
+    @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
+    // @MinLength(5, { message: `${ConstantValidator.MIN_LENGTH} 5` })
+    readonly text: string;
+
+    // @IsString({ message: ConstantValidator.INVALID })
+    // @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
+    // readonly fromId: string;
+
+    // @IsString({ message: ConstantValidator.INVALID })
+    // @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
+    // readonly toId: string;
+  }
 
   export class IsActive extends OmitType(MessageEntity, [
     'id',
@@ -53,5 +74,20 @@ export namespace MessageRequest {
     @IsBoolean({ message: ConstantValidator.INVALID })
     @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
     readonly isRead: boolean;
+  }
+
+  export class Pagination {
+    @IsOptional()
+    @IsInt()
+    @Min(1)
+    @Max(50)
+    @Type(() => Number)
+    limit: number;
+
+    @IsOptional()
+    @IsInt()
+    @Min(0)
+    @Type(() => Number)
+    offset: number;
   }
 }

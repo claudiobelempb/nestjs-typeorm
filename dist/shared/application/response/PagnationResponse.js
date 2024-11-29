@@ -9,22 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserShowService = void 0;
-const common_1 = require("@nestjs/common");
-const UserRepository_1 = require("../../domain/repositories/UserRepository");
-const user_mapper_1 = require("../mapper/user.mapper");
-let UserShowService = class UserShowService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
-    }
-    async execute(id) {
-        const response = await this.userRepository.show(id);
-        return user_mapper_1.UserMapper.toResponse(response);
-    }
-};
-exports.UserShowService = UserShowService;
-exports.UserShowService = UserShowService = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [UserRepository_1.UserRepository])
-], UserShowService);
-//# sourceMappingURL=UserShowService.js.map
+exports.PaginationResponse = void 0;
+const class_transformer_1 = require("class-transformer");
+const class_validator_1 = require("class-validator");
+class PaginationResponse {
+}
+exports.PaginationResponse = PaginationResponse;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_transformer_1.Type)(() => Number),
+    __metadata("design:type", Number)
+], PaginationResponse.prototype, "limit", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_transformer_1.Type)(() => Number),
+    __metadata("design:type", Number)
+], PaginationResponse.prototype, "offset", void 0);
+//# sourceMappingURL=PagnationResponse.js.map
