@@ -8,20 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InvalidCredentialsExeptionFilter = void 0;
 const common_1 = require("@nestjs/common");
-const AppInvalidCredentialsExeption_1 = require("../AppInvalidCredentialsExeption");
+const AppInvalidCredentialsException_1 = require("../AppInvalidCredentialsException");
 let InvalidCredentialsExeptionFilter = class InvalidCredentialsExeptionFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
-        response.status(400).send({
-            statusCode: 400,
-            error: 'Bad Request',
+        response.status(422).send({
+            statusCode: 422,
+            error: 'Unprocessable Entity',
             message: exception.message,
         });
     }
 };
 exports.InvalidCredentialsExeptionFilter = InvalidCredentialsExeptionFilter;
 exports.InvalidCredentialsExeptionFilter = InvalidCredentialsExeptionFilter = __decorate([
-    (0, common_1.Catch)(AppInvalidCredentialsExeption_1.AppInvalidCredentialsException)
+    (0, common_1.Catch)(AppInvalidCredentialsException_1.AppInvalidCredentialsException)
 ], InvalidCredentialsExeptionFilter);
 //# sourceMappingURL=AppInvalidCredentialsExceptioFilter.js.map

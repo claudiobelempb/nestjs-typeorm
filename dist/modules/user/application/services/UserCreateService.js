@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserCreateService = void 0;
 const common_1 = require("@nestjs/common");
-const AppBadRequestExeption_1 = require("../../../../shared/infra/exeptions/AppBadRequestExeption");
+const AppBadRequestException_1 = require("../../../../shared/infra/exeptions/AppBadRequestException");
 const ConstantException_1 = require("../../../../shared/utils/constants/ConstantException");
 const use_entity_1 = require("../../domain/entities/use.entity");
 const UserRepository_1 = require("../../domain/repositories/UserRepository");
@@ -23,10 +23,10 @@ let UserCreateService = class UserCreateService {
     async execute(request) {
         const { firstName, lastName, email, password, passwordConfirm } = request;
         if (!firstName || !lastName || !email || !password || !passwordConfirm) {
-            throw new AppBadRequestExeption_1.AppBadRequestExeption(ConstantException_1.ConstantException.FIELD_REQUIRED);
+            throw new AppBadRequestException_1.AppBadRequestException(ConstantException_1.ConstantException.FIELD_REQUIRED);
         }
         if (password !== passwordConfirm) {
-            throw new AppBadRequestExeption_1.AppBadRequestExeption(ConstantException_1.ConstantException.PASSWORD_NOT_MATCH);
+            throw new AppBadRequestException_1.AppBadRequestException(ConstantException_1.ConstantException.PASSWORD_NOT_MATCH);
         }
         await this.userRepository.emailExists(email);
         const hashPassword = await this.hashProvider.generateHash(password);

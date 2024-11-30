@@ -1,7 +1,7 @@
-import { MessageService } from '../../application/services/message.service';
-import { MessageRequest } from '../requests/MessageRequest';
-import { MessageEntity } from '../../domain/entities/MessageEntity';
 import { MessageResponse } from '../../application/response/MessageResponse';
+import { MessageService } from '../../application/services/message.service';
+import { MessageEntity } from '../../domain/entities/MessageEntity';
+import { MessageRequest } from '../requests/MessageRequest';
 export declare class MessageController {
     private readonly messageService;
     constructor(messageService: MessageService);

@@ -1,4 +1,4 @@
-import { HashProvider } from 'src/shared/application/interfaces/hash.interface';
+import { HashProvider } from 'src/shared/common/interfaces/hash.interface';
 import { UserEntity } from '../../domain/entities/use.entity';
 import { UserRepository } from '../../domain/repositories/UserRepository';
 import { UserRequest } from '../../infra/request/user.request';

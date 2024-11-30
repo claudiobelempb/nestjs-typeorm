@@ -6,17 +6,18 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  ParseIntPipe,
   Patch,
   Post,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
-import { MessageService } from '../../application/services/message.service';
-import { MessageRequest } from '../requests/MessageRequest';
-import { MessageEntity } from '../../domain/entities/MessageEntity';
+import { AuthInterceptor } from 'src/shared/common/interceptors/AuthInterceptor';
 import { MessageResponse } from '../../application/response/MessageResponse';
-import { PaginationResponse } from 'src/shared/application/response/PagnationResponse';
+import { MessageService } from '../../application/services/message.service';
+import { MessageEntity } from '../../domain/entities/MessageEntity';
+import { MessageRequest } from '../requests/MessageRequest';
 
+@UseInterceptors(AuthInterceptor)
 @Controller('messages')
 export class MessageController {
   constructor(private readonly messageService: MessageService) {}

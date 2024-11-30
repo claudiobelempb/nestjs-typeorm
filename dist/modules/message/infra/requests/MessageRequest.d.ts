@@ -13,11 +13,11 @@ export declare namespace MessageRequest {
     export class Update implements Omit<MessageRequestProps, 'fromId' | 'toId'> {
         readonly text: string;
     }
-    const IsActive_base: import("@nestjs/mapped-types").MappedType<Omit<MessageEntity, "id" | "text" | "to" | "from" | "isRead" | "createdAt" | "updatedAt">>;
+    const IsActive_base: import("@nestjs/mapped-types").MappedType<Omit<MessageEntity, "id" | "createdAt" | "updatedAt" | "text" | "from" | "to" | "isRead">>;
     export class IsActive extends IsActive_base {
         readonly isActive: boolean;
     }
-    const IsRead_base: import("@nestjs/mapped-types").MappedType<Omit<MessageEntity, "id" | "text" | "to" | "from" | "createdAt" | "updatedAt" | "isActive">>;
+    const IsRead_base: import("@nestjs/mapped-types").MappedType<Omit<MessageEntity, "id" | "isActive" | "createdAt" | "updatedAt" | "text" | "from" | "to">>;
     export class IsRead extends IsRead_base {
         readonly isRead: boolean;
     }

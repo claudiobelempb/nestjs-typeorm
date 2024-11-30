@@ -1,6 +1,6 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { Response } from 'express';
-import { AppInvalidCredentialsException } from '../AppInvalidCredentialsExeption';
+import { AppInvalidCredentialsException } from '../AppInvalidCredentialsException';
 
 @Catch(AppInvalidCredentialsException)
 export class InvalidCredentialsExeptionFilter implements ExceptionFilter {
@@ -8,9 +8,9 @@ export class InvalidCredentialsExeptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
-    response.status(400).send({
-      statusCode: 400,
-      error: 'Bad Request',
+    response.status(422).send({
+      statusCode: 422,
+      error: 'Unprocessable Entity',
       message: exception.message,
     });
   }

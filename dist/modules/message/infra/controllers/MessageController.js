@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MessageController = void 0;
 const common_1 = require("@nestjs/common");
+const AuthInterceptor_1 = require("../../../../shared/common/interceptors/AuthInterceptor");
 const message_service_1 = require("../../application/services/message.service");
 const MessageRequest_1 = require("../requests/MessageRequest");
 let MessageController = class MessageController {
@@ -127,6 +128,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], MessageController.prototype, "remove", null);
 exports.MessageController = MessageController = __decorate([
+    (0, common_1.UseInterceptors)(AuthInterceptor_1.AuthInterceptor),
     (0, common_1.Controller)('messages'),
     __metadata("design:paramtypes", [message_service_1.MessageService])
 ], MessageController);

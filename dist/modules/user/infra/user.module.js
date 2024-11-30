@@ -15,7 +15,6 @@ const UserIndexService_1 = require("../application/services/UserIndexService");
 const UserRepository_1 = require("../domain/repositories/UserRepository");
 const UserCreateController_1 = require("./controllers/UserCreateController");
 const UserCreateService_1 = require("../application/services/UserCreateService");
-const BcryptjsHashProvider_1 = require("../../../shared/application/providers/BcryptjsHashProvider");
 const UserDeleteController_1 = require("./controllers/UserDeleteController");
 const UserDeleteService_1 = require("../application/services/UserDeleteService");
 const UserShowService_1 = require("../application/services/UserShowService");
@@ -28,6 +27,7 @@ const UserActiveController_1 = require("./controllers/UserActiveController");
 const UserDeactiveController_1 = require("./controllers/UserDeactiveController");
 const UserUpdatePasswordService_1 = require("../application/services/UserUpdatePasswordService");
 const UserUpdatePasswordController_1 = require("./controllers/UserUpdatePasswordController");
+const BcryptjsHashProvider_1 = require("../../../shared/common/providers/BcryptjsHashProvider");
 let UserModule = class UserModule {
 };
 exports.UserModule = UserModule;

@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { HashProvider } from 'src/shared/application/interfaces/hash.interface';
-import { AppConflictException } from 'src/shared/domain/exceptions/AppConflictException';
-import { AppBadRequestExeption } from 'src/shared/infra/exeptions/AppBadRequestExeption';
+import { HashProvider } from 'src/shared/common/interfaces/hash.interface';
+import { AppBadRequestException } from 'src/shared/infra/exeptions/AppBadRequestException';
 import { ConstantException } from 'src/shared/utils/constants/ConstantException';
 import { UserEntity } from '../../domain/entities/use.entity';
 import { UserRepository } from '../../domain/repositories/UserRepository';
 import { UserRequest } from '../../infra/request/user.request';
-import { Entity } from 'typeorm';
 
 @Injectable()
 export class UserCreateService {
@@ -19,11 +17,11 @@ export class UserCreateService {
     const { firstName, lastName, email, password, passwordConfirm } = request;
 
     if (!firstName || !lastName || !email || !password || !passwordConfirm) {
-      throw new AppBadRequestExeption(ConstantException.FIELD_REQUIRED);
+      throw new AppBadRequestException(ConstantException.FIELD_REQUIRED);
     }
 
     if (password !== passwordConfirm) {
-      throw new AppBadRequestExeption(ConstantException.PASSWORD_NOT_MATCH);
+      throw new AppBadRequestException(ConstantException.PASSWORD_NOT_MATCH);
     }
 
     await this.userRepository.emailExists(email);

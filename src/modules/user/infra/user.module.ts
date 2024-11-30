@@ -7,8 +7,7 @@ import { UserRepository } from '../domain/repositories/UserRepository';
 import { Repository } from 'typeorm';
 import { UserCreateController } from './controllers/UserCreateController';
 import { UserCreateService } from '../application/services/UserCreateService';
-import { HashProvider } from 'src/shared/application/interfaces/hash.interface';
-import { BcryptjsHashProvider } from 'src/shared/application/providers/BcryptjsHashProvider';
+import { HashProvider } from 'src/shared/common/interfaces/hash.interface';
 import { UserDeleteController } from './controllers/UserDeleteController';
 import { UserDeleteService } from '../application/services/UserDeleteService';
 import { UserShowService } from '../application/services/UserShowService';
@@ -22,6 +21,7 @@ import { UserActiveController } from './controllers/UserActiveController';
 import { UserDeactiveController } from './controllers/UserDeactiveController';
 import { UserUpdatePasswordService } from '../application/services/UserUpdatePasswordService';
 import { UserUpdatePasswordController } from './controllers/UserUpdatePasswordController';
+import { BcryptjsHashProvider } from 'src/shared/common/providers/BcryptjsHashProvider';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],

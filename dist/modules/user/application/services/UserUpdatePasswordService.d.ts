@@ -1,5 +1,5 @@
 import { UserRepository } from '../../domain/repositories/UserRepository';
-import { HashProvider } from 'src/shared/application/interfaces/hash.interface';
+import { HashProvider } from 'src/shared/common/interfaces/hash.interface';
 import { UserRequest } from '../../infra/request/user.request';
 export declare class UserUpdatePasswordService {
     private readonly userRepository;

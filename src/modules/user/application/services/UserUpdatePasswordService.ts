@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../../domain/repositories/UserRepository';
-import { HashProvider } from 'src/shared/application/interfaces/hash.interface';
+import { HashProvider } from 'src/shared/common/interfaces/hash.interface';
 import { UserRequest } from '../../infra/request/user.request';
-import { AppInvalidPasswordExeption } from 'src/shared/infra/exeptions/AppInvalidPasswordExeption';
+import { AppInvalidPasswordException } from 'src/shared/infra/exeptions/AppInvalidPasswordException';
 import { ConstantException } from 'src/shared/utils/constants/ConstantException';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class UserUpdatePasswordService {
     const entity = await this.userRepository.show(id);
 
     if (!password || !oldPassword) {
-      throw new AppInvalidPasswordExeption(
+      throw new AppInvalidPasswordException(
         ConstantException.OLD_PASSWORD_AND_NEW_PASSWORD_REQUERID,
       );
     }
@@ -27,7 +27,7 @@ export class UserUpdatePasswordService {
     );
 
     if (!checkOldPassword) {
-      throw new AppInvalidPasswordExeption(
+      throw new AppInvalidPasswordException(
         ConstantException.OLD_PASSWORD_NOT_MATH,
       );
     }

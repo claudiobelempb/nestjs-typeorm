@@ -1,9 +1,9 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppConflictExceptionFilter } from './shared/domain/exceptions/filters/AppConflictExceptionFilter';
 import { AppNotFoundExceptionFilter } from './shared/domain/exceptions/filters/AppNotFoundExceptionFilter';
-import { InvalidPasswordExceptionFilter } from './shared/infra/exeptions/filters/AppInvalidPasswordExeptionFilter';
+import { InvalidPasswordExceptionFilter } from './shared/infra/exeptions/filters/AppInvalidPasswordExceptionFilter';
 import { InvalidCredentialsExeptionFilter } from './shared/infra/exeptions/filters/AppInvalidCredentialsExceptioFilter';
-import { AppBadRequestExeptionFilter } from './shared/infra/exeptions/filters/AppBadRequestExeptionFilter';
+import { AppBadRequestExeptionFilter } from './shared/infra/exeptions/filters/AppBadRequestExceptionFilter';
 import { AppValidationExceptionFilter } from './shared/domain/exceptions/filters/AppValidationExceptionFilter';
 
 export function applyGloboConfig(app: INestApplication) {
@@ -13,7 +13,7 @@ export function applyGloboConfig(app: INestApplication) {
       errorHttpStatusCode: 422,
       whitelist: true,
       forbidNonWhitelisted: true,
-      transform: true,
+      transform: false,
     }),
   ),
     // app.useGlobalInterceptors(

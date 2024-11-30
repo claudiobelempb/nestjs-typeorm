@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserUpdatePasswordService = void 0;
 const common_1 = require("@nestjs/common");
 const UserRepository_1 = require("../../domain/repositories/UserRepository");
-const AppInvalidPasswordExeption_1 = require("../../../../shared/infra/exeptions/AppInvalidPasswordExeption");
+const AppInvalidPasswordException_1 = require("../../../../shared/infra/exeptions/AppInvalidPasswordException");
 const ConstantException_1 = require("../../../../shared/utils/constants/ConstantException");
 let UserUpdatePasswordService = class UserUpdatePasswordService {
     constructor(userRepository, hashProvider) {
@@ -23,11 +23,11 @@ let UserUpdatePasswordService = class UserUpdatePasswordService {
         const { password, oldPassword } = request;
         const entity = await this.userRepository.show(id);
         if (!password || !oldPassword) {
-            throw new AppInvalidPasswordExeption_1.AppInvalidPasswordExeption(ConstantException_1.ConstantException.OLD_PASSWORD_AND_NEW_PASSWORD_REQUERID);
+            throw new AppInvalidPasswordException_1.AppInvalidPasswordException(ConstantException_1.ConstantException.OLD_PASSWORD_AND_NEW_PASSWORD_REQUERID);
         }
         const checkOldPassword = await this.hashProvider.compareHash(oldPassword, entity.password);
         if (!checkOldPassword) {
-            throw new AppInvalidPasswordExeption_1.AppInvalidPasswordExeption(ConstantException_1.ConstantException.OLD_PASSWORD_NOT_MATH);
+            throw new AppInvalidPasswordException_1.AppInvalidPasswordException(ConstantException_1.ConstantException.OLD_PASSWORD_NOT_MATH);
         }
         const hashPassword = await this.hashProvider.generateHash(password);
         await this.userRepository.updatePassword(id, hashPassword);

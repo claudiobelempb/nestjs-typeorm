@@ -7,7 +7,6 @@ import { MessageEntity } from '../../domain/entities/MessageEntity';
 import { MessageRequest } from '../../infra/requests/MessageRequest';
 import { MessageMapper } from '../mapper/MessageMapper';
 import { MessageResponse } from '../response/MessageResponse';
-import { PaginationResponse } from 'src/shared/application/response/PagnationResponse';
 
 @Injectable()
 export class MessageService {
