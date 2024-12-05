@@ -1,5 +1,5 @@
 import { ArgumentsHost, ExceptionFilter } from '@nestjs/common';
-import { AppNotFoundException } from '../AppNotFoundException';
+import { StandarError } from 'src/shared/utils/exceptions/StandarError';
 export declare class AppNotFoundExceptionFilter implements ExceptionFilter {
-    catch(exception: AppNotFoundException, host: ArgumentsHost): void;
+    catch(exception: StandarError, host: ArgumentsHost): void;
 }

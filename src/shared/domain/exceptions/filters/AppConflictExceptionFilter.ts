@@ -1,17 +1,23 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
-import { AppConflictException } from '../AppConflictException';
 import { Response } from 'express';
+import { ConstantException } from 'src/shared/utils/constants/ConstantException';
+import { StandarError } from 'src/shared/utils/exceptions/StandarError';
+import { AppConflictException } from '../AppConflictException';
 
 @Catch(AppConflictException)
 export class AppConflictExceptionFilter implements ExceptionFilter {
-  catch(exception: AppConflictException, host: ArgumentsHost) {
+  catch(exception: StandarError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
+    const request = ctx.getRequest<Request>();
+    const statusCode = exception.status ? exception.status : 409;
 
-    response.status(409).send({
-      statusCode: 409,
-      error: 'Conflict',
+    response.status(statusCode).send({
+      timestamp: new Date().toISOString(),
+      statusCode,
+      error: ConstantException.CONFICT_EMAIL,
       message: exception.message,
+      path: request.url,
     });
   }
 }

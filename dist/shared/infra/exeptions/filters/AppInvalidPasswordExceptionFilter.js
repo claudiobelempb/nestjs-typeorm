@@ -8,15 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InvalidPasswordExceptionFilter = void 0;
 const common_1 = require("@nestjs/common");
+const ConstantException_1 = require("../../../utils/constants/ConstantException");
 const AppInvalidPasswordException_1 = require("../AppInvalidPasswordException");
 let InvalidPasswordExceptionFilter = class InvalidPasswordExceptionFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
-        response.status(422).send({
-            statusCode: 422,
-            error: 'Unprocessable Entity',
+        const request = ctx.getRequest();
+        const statusCode = exception.status ? exception.status : 422;
+        response.status(statusCode).send({
+            timestamp: new Date().toISOString(),
+            statusCode,
+            error: ConstantException_1.ConstantException.UNPROCESSABLE_ENTITY,
             message: exception.message,
+            path: request.url,
         });
     }
 };

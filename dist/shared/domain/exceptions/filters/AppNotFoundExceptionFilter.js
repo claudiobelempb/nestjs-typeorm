@@ -8,15 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppNotFoundExceptionFilter = void 0;
 const common_1 = require("@nestjs/common");
+const ConstantException_1 = require("../../../utils/constants/ConstantException");
 const AppNotFoundException_1 = require("../AppNotFoundException");
 let AppNotFoundExceptionFilter = class AppNotFoundExceptionFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
-        response.status(404).send({
-            statusCode: 404,
-            error: 'Not Found',
+        const request = ctx.getRequest();
+        const statusCode = exception.status ? exception.status : 404;
+        response.status(statusCode).send({
+            timestamp: new Date().toISOString(),
+            statusCode,
+            error: ConstantException_1.ConstantException.NOT_FOUND,
             message: exception.message,
+            path: request.url,
         });
     }
 };

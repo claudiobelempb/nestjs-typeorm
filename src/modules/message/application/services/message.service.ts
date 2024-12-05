@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserShowService } from 'src/modules/user/application/services/UserShowService';
+import { AppNotFoundException } from 'src/shared/domain/exceptions/AppNotFoundException';
 import { ConstantException } from 'src/shared/utils/constants/ConstantException';
 import { Repository } from 'typeorm';
 import { MessageEntity } from '../../domain/entities/MessageEntity';
@@ -66,7 +67,7 @@ export class MessageService {
       });
       return MessageMapper.toResponse(entity);
     } catch (error) {
-      throw new NotFoundException(ConstantException.ENTITY_NOT_FOUND);
+      throw new AppNotFoundException(ConstantException.ENTITY_NOT_FOUND);
     }
   }
 
@@ -109,7 +110,7 @@ export class MessageService {
       });
       await this.messageRepositoy.save(entity);
     } catch (error) {
-      throw new NotFoundException(ConstantException.ENTITY_NOT_FOUND);
+      throw new AppNotFoundException(ConstantException.ENTITY_NOT_FOUND);
     }
   }
 
@@ -121,7 +122,7 @@ export class MessageService {
       });
       await this.messageRepositoy.save(entity);
     } catch (error) {
-      throw new NotFoundException(ConstantException.ENTITY_NOT_FOUND);
+      throw new AppNotFoundException(ConstantException.ENTITY_NOT_FOUND);
     }
   }
 
@@ -133,7 +134,7 @@ export class MessageService {
       });
       await this.messageRepositoy.save(entity);
     } catch (error) {
-      throw new NotFoundException(ConstantException.ENTITY_NOT_FOUND);
+      throw new AppNotFoundException(ConstantException.ENTITY_NOT_FOUND);
     }
   }
 
@@ -145,7 +146,7 @@ export class MessageService {
       });
       await this.messageRepositoy.save(entity);
     } catch (error) {
-      throw new NotFoundException(ConstantException.ENTITY_NOT_FOUND);
+      throw new AppNotFoundException(ConstantException.ENTITY_NOT_FOUND);
     }
   }
 
@@ -154,7 +155,7 @@ export class MessageService {
       const entity = await this.messageRepositoy.findOneBy({ id });
       await this.messageRepositoy.remove(entity);
     } catch (error) {
-      throw new NotFoundException(ConstantException.ENTITY_NOT_FOUND);
+      throw new AppNotFoundException(ConstantException.ENTITY_NOT_FOUND);
     }
   }
 }

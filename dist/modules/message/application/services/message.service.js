@@ -16,6 +16,7 @@ exports.MessageService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const UserShowService_1 = require("../../../user/application/services/UserShowService");
+const AppNotFoundException_1 = require("../../../../shared/domain/exceptions/AppNotFoundException");
 const ConstantException_1 = require("../../../../shared/utils/constants/ConstantException");
 const typeorm_2 = require("typeorm");
 const MessageEntity_1 = require("../../domain/entities/MessageEntity");
@@ -73,7 +74,7 @@ let MessageService = class MessageService {
             return MessageMapper_1.MessageMapper.toResponse(entity);
         }
         catch (error) {
-            throw new common_1.NotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
+            throw new AppNotFoundException_1.AppNotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
         }
     }
     async create(request) {
@@ -107,7 +108,7 @@ let MessageService = class MessageService {
             await this.messageRepositoy.save(entity);
         }
         catch (error) {
-            throw new common_1.NotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
+            throw new AppNotFoundException_1.AppNotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
         }
     }
     async updateIsDeactive(id) {
@@ -119,7 +120,7 @@ let MessageService = class MessageService {
             await this.messageRepositoy.save(entity);
         }
         catch (error) {
-            throw new common_1.NotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
+            throw new AppNotFoundException_1.AppNotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
         }
     }
     async updateIsRead(id) {
@@ -131,7 +132,7 @@ let MessageService = class MessageService {
             await this.messageRepositoy.save(entity);
         }
         catch (error) {
-            throw new common_1.NotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
+            throw new AppNotFoundException_1.AppNotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
         }
     }
     async updateIsUnread(id) {
@@ -143,7 +144,7 @@ let MessageService = class MessageService {
             await this.messageRepositoy.save(entity);
         }
         catch (error) {
-            throw new common_1.NotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
+            throw new AppNotFoundException_1.AppNotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
         }
     }
     async delete(id) {
@@ -152,7 +153,7 @@ let MessageService = class MessageService {
             await this.messageRepositoy.remove(entity);
         }
         catch (error) {
-            throw new common_1.NotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
+            throw new AppNotFoundException_1.AppNotFoundException(ConstantException_1.ConstantException.ENTITY_NOT_FOUND);
         }
     }
 };

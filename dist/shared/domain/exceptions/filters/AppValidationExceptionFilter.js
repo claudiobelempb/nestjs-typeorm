@@ -8,15 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppValidationExceptionFilter = void 0;
 const common_1 = require("@nestjs/common");
+const ConstantException_1 = require("../../../utils/constants/ConstantException");
 const AppValidationException_1 = require("../AppValidationException");
 let AppValidationExceptionFilter = class AppValidationExceptionFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
-        response.status(409).send({
-            statusCode: 409,
-            error: 'Conflict',
+        const request = ctx.getRequest();
+        const statusCode = exception.status ? exception.status : 422;
+        response.status(statusCode).send({
+            timestamp: new Date().toISOString(),
+            statusCode,
+            error: ConstantException_1.ConstantException.UNPROCESSABLE_ENTITY,
             message: exception.message,
+            path: request.url,
         });
     }
 };

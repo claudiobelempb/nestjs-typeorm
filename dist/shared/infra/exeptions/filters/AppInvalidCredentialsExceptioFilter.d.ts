@@ -1,5 +1,5 @@
 import { ArgumentsHost, ExceptionFilter } from '@nestjs/common';
-import { AppInvalidCredentialsException } from '../AppInvalidCredentialsException';
+import { StandarError } from 'src/shared/utils/exceptions/StandarError';
 export declare class InvalidCredentialsExeptionFilter implements ExceptionFilter {
-    catch(exception: AppInvalidCredentialsException, host: ArgumentsHost): void;
+    catch(exception: StandarError, host: ArgumentsHost): void;
 }

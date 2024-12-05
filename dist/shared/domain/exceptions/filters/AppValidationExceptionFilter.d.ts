@@ -1,5 +1,5 @@
 import { ArgumentsHost, ExceptionFilter } from '@nestjs/common';
-import { AppValidationException } from '../AppValidationException';
+import { StandarError } from 'src/shared/utils/exceptions/StandarError';
 export declare class AppValidationExceptionFilter implements ExceptionFilter {
-    catch(exception: AppValidationException, host: ArgumentsHost): void;
+    catch(exception: StandarError, host: ArgumentsHost): void;
 }

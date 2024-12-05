@@ -8,15 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppConflictExceptionFilter = void 0;
 const common_1 = require("@nestjs/common");
+const ConstantException_1 = require("../../../utils/constants/ConstantException");
 const AppConflictException_1 = require("../AppConflictException");
 let AppConflictExceptionFilter = class AppConflictExceptionFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
-        response.status(409).send({
-            statusCode: 409,
-            error: 'Conflict',
+        const request = ctx.getRequest();
+        const statusCode = exception.status ? exception.status : 409;
+        response.status(statusCode).send({
+            timestamp: new Date().toISOString(),
+            statusCode,
+            error: ConstantException_1.ConstantException.CONFICT_EMAIL,
             message: exception.message,
+            path: request.url,
         });
     }
 };

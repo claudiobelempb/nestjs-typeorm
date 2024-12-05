@@ -1,5 +1,5 @@
 import { ArgumentsHost, ExceptionFilter } from '@nestjs/common';
-import { AppConflictException } from '../AppConflictException';
+import { StandarError } from 'src/shared/utils/exceptions/StandarError';
 export declare class AppConflictExceptionFilter implements ExceptionFilter {
-    catch(exception: AppConflictException, host: ArgumentsHost): void;
+    catch(exception: StandarError, host: ArgumentsHost): void;
 }
