@@ -15,7 +15,7 @@ export class AppConflictExceptionFilter implements ExceptionFilter {
     response.status(statusCode).send({
       timestamp: new Date().toISOString(),
       statusCode,
-      error: ConstantException.CONFICT_EMAIL,
+      error: ConstantException.CONFICT,
       message: exception.message,
       path: request.url,
     });

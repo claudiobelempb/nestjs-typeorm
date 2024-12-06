@@ -18,6 +18,7 @@ export class ConstantException {
   static EMAIL_EXIST: string = 'Already exists in our database';
   static PRICE_POSITIVO_REQUIRED: string = 'Price must be a positive value';
   static CONFICT_EMAIL: string = 'User with same e-mail already exists';
+  static CONFICT: string = ' Conflict';
   static DATA_PRESENT_REQUIRED: string =
     'The product date cannot be in the future';
   static OLD_PASSWORD_NOT_MATH: string = 'Old password does not math';

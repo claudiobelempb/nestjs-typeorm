@@ -19,7 +19,7 @@ let AppConflictExceptionFilter = class AppConflictExceptionFilter {
         response.status(statusCode).send({
             timestamp: new Date().toISOString(),
             statusCode,
-            error: ConstantException_1.ConstantException.CONFICT_EMAIL,
+            error: ConstantException_1.ConstantException.CONFICT,
             message: exception.message,
             path: request.url,
         });

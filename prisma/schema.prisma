@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model message {
+  id                      String   @id(map: "PK_ba01f0a3e0123651915008bc578") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  text                    String   @db.VarChar(255)
+  isRead                  Boolean  @default(false)
+  isActive                Boolean  @default(true)
+  createdAt               DateTime @default(now()) @db.Timestamp(6)
+  updatedAt               DateTime @default(now()) @db.Timestamp(6)
+  from                    String?  @db.Uuid
+  to                      String?  @db.Uuid
+  user_message_toTouser   user?    @relation("message_toTouser", fields: [to], references: [id], onDelete: Cascade, map: "FK_1a57b553e1fc557b3aea889f978")
+  user_message_fromTouser user?    @relation("message_fromTouser", fields: [from], references: [id], onDelete: Cascade, map: "FK_e4d5c8e94b4f272368df2565ff8")
+}
+
+model user {
+  id                         String    @id(map: "PK_cace4a159ff9f2512dd42373760") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  firstName                  String    @db.VarChar
+  lastName                   String    @db.VarChar
+  email                      String    @unique(map: "UQ_e12875dfb3b1d92d7d7c5377e22") @db.VarChar
+  password                   String    @db.VarChar
+  isActive                   Boolean   @default(true)
+  isAmbassador               Boolean   @default(true)
+  createdAt                  DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt                  DateTime  @default(now()) @db.Timestamp(6)
+  message_message_toTouser   message[] @relation("message_toTouser")
+  message_message_fromTouser message[] @relation("message_fromTouser")
+}

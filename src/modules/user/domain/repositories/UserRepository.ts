@@ -121,3 +121,12 @@ export class UserRepository implements IUserRepository {
     }
   }
 }
+
+/*
+  01 tela do samsung a03
+  01 tela do samsung a30s
+  01 tela do samsung a31 A315F
+  01 bateria do redmi not 7 BN4A
+  01 bateria do motorola g30 JK50
+  01 tampa traseira do samsung a01 core
+*/

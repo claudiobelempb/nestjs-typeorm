@@ -1,8 +1,16 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
 import { UserCreateService } from '../../application/services/UserCreateService';
-import { UserEntity } from '../../domain/entities/use.entity';
 import { UserRequest } from '../request/user.request';
+import { LogIntercepto } from 'src/shared/common/interceptors/log.intercepto';
 
+@UseInterceptors(LogIntercepto)
 @Controller('admin/users')
 export class UserCreateController {
   constructor(private readonly userCreateService: UserCreateService) {}

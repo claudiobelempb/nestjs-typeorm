@@ -10,7 +10,9 @@ export const dataSourceOption: TypeOrmModuleOptions = {
   database: 'admin',
   migrations: [],
   entities: [],
-  synchronize: true /*Carrega entidades sem precisar especificar-las*/,
+  synchronize:
+    process.env.ENV ===
+    'development' /*Carrega entidades sem precisar especificar-las*/,
   autoLoadEntities:
     true /*Sincroniza com o DB. não deve ser usado em produção */,
 };

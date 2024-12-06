@@ -10,7 +10,8 @@ exports.dataSourceOption = {
     database: 'admin',
     migrations: [],
     entities: [],
-    synchronize: true,
+    synchronize: process.env.ENV ===
+        'development',
     autoLoadEntities: true,
 };
 //# sourceMappingURL=type-orm.config.js.map

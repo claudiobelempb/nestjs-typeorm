@@ -13,11 +13,11 @@ export declare namespace UserRequest {
         readonly password: string;
         readonly passwordConfirm: string;
     }
-    class Update implements Omit<UserRequestProps, 'id' | 'firstName' | 'lastName' | 'email' | 'password' | 'passwordConfirm'> {
+    class Update implements Omit<UserRequestProps, 'firstName' | 'lastName' | 'email' | 'password' | 'passwordConfirm'> {
         readonly firstName: string;
         readonly lastName: string;
     }
-    class UpdatePassword implements Omit<UserRequestProps, 'id' | 'firstName' | 'lastName' | 'email'> {
+    class UpdatePassword implements Omit<UserRequestProps, 'firstName' | 'lastName' | 'email'> {
         passwordConfirm: string;
         readonly password: string;
         readonly oldPassword: string;

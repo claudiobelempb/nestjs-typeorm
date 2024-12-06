@@ -4,6 +4,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { UserDeleteService } from '../../application/services/UserDeleteService';
 
@@ -13,7 +14,7 @@ export class UserDeleteController {
 
   @HttpCode(HttpStatus.OK)
   @Delete(':id')
-  async handle(@Param('id') id: string) {
+  async handle(@Param('id', ParseUUIDPipe) id: string) {
     await this.userDeleteService.execute(id);
   }
 }

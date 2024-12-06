@@ -16,6 +16,7 @@ exports.UserCreateController = void 0;
 const common_1 = require("@nestjs/common");
 const UserCreateService_1 = require("../../application/services/UserCreateService");
 const user_request_1 = require("../request/user.request");
+const log_intercepto_1 = require("../../../../shared/common/interceptors/log.intercepto");
 let UserCreateController = class UserCreateController {
     constructor(userCreateService) {
         this.userCreateService = userCreateService;
@@ -34,6 +35,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserCreateController.prototype, "handle", null);
 exports.UserCreateController = UserCreateController = __decorate([
+    (0, common_1.UseInterceptors)(log_intercepto_1.LogIntercepto),
     (0, common_1.Controller)('admin/users'),
     __metadata("design:paramtypes", [UserCreateService_1.UserCreateService])
 ], UserCreateController);

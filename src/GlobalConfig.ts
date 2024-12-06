@@ -1,11 +1,10 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppConflictExceptionFilter } from './shared/domain/exceptions/filters/AppConflictExceptionFilter';
 import { AppNotFoundExceptionFilter } from './shared/domain/exceptions/filters/AppNotFoundExceptionFilter';
-import { InvalidPasswordExceptionFilter } from './shared/infra/exeptions/filters/AppInvalidPasswordExceptionFilter';
-import { InvalidCredentialsExeptionFilter } from './shared/infra/exeptions/filters/AppInvalidCredentialsExceptioFilter';
-import { AppBadRequestExeptionFilter } from './shared/infra/exeptions/filters/AppBadRequestExceptionFilter';
 import { AppValidationExceptionFilter } from './shared/domain/exceptions/filters/AppValidationExceptionFilter';
-import { AdminGuard } from './shared/common/guards/Admin.guard';
+import { AppBadRequestExeptionFilter } from './shared/infra/exeptions/filters/AppBadRequestExceptionFilter';
+import { InvalidCredentialsExeptionFilter } from './shared/infra/exeptions/filters/AppInvalidCredentialsExceptioFilter';
+import { InvalidPasswordExceptionFilter } from './shared/infra/exeptions/filters/AppInvalidPasswordExceptionFilter';
 
 export function applyGloboConfig(app: INestApplication) {
   app.setGlobalPrefix('api/v1');

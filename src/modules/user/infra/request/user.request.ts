@@ -1,6 +1,5 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
 import { ConstantValidator } from 'src/shared/utils/constants/ConstantValidator';
-import { UserEntity } from '../../domain/entities/use.entity';
 
 type UserRequestProps = {
   firstName: string;
@@ -33,6 +32,7 @@ export namespace UserRequest {
 
     @IsString({ message: ConstantValidator.INVALID })
     @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
+    // @IsStrongPassword({ minLength: 6 })
     // @MinLength(5, { message: `${ConstantValidator.MIN_LENGTH} 5` })
     readonly passwordConfirm: string;
   }
@@ -41,12 +41,7 @@ export namespace UserRequest {
     implements
       Omit<
         UserRequestProps,
-        | 'id'
-        | 'firstName'
-        | 'lastName'
-        | 'email'
-        | 'password'
-        | 'passwordConfirm'
+        'firstName' | 'lastName' | 'email' | 'password' | 'passwordConfirm'
       >
   {
     @IsString({ message: ConstantValidator.INVALID })
@@ -58,25 +53,21 @@ export namespace UserRequest {
     @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
     // @MinLength(5, { message: `${ConstantValidator.MIN_LENGTH} 5` })
     readonly lastName: string;
-
-    // @IsString({ message: ConstantValidator.INVALID })
-    // @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
-    // @MinLength(5, { message: `${ConstantValidator.MIN_LENGTH} 5` })
-    // readonly password: string;
   }
 
   export class UpdatePassword
-    implements
-      Omit<UserRequestProps, 'id' | 'firstName' | 'lastName' | 'email'>
+    implements Omit<UserRequestProps, 'firstName' | 'lastName' | 'email'>
   {
     passwordConfirm: string;
     @IsString({ message: ConstantValidator.INVALID })
     @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
+    // @IsStrongPassword({ minLength: 6 })
     // @MinLength(5, { message: `${ConstantValidator.MIN_LENGTH} 5` })
     readonly password: string;
 
     @IsString({ message: ConstantValidator.INVALID })
     @IsNotEmpty({ message: ConstantValidator.REQUIRED_FIELD })
+    // @IsStrongPassword({ minLength: 6 })
     // @MinLength(5, { message: `${ConstantValidator.MIN_LENGTH} 5` })
     readonly oldPassword: string;
   }

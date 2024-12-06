@@ -18,6 +18,7 @@ export declare class ConstantException {
     static EMAIL_EXIST: string;
     static PRICE_POSITIVO_REQUIRED: string;
     static CONFICT_EMAIL: string;
+    static CONFICT: string;
     static DATA_PRESENT_REQUIRED: string;
     static OLD_PASSWORD_NOT_MATH: string;
     static OLD_PASSWORD_AND_NEW_PASSWORD_REQUERID: string;
